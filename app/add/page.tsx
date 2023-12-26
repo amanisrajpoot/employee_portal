@@ -5,11 +5,7 @@ import { User } from '../store/userStore';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '../store/userStore';
 
-interface EmployeeFormProps {
-  onSubmit: (formData: Partial<User>) => void;
-}
-
-const Add: React.FC<EmployeeFormProps> = () => {
+const Add: React.FC = () => {
   const router = useRouter()
   const { addUser, users } = useUserStore();
   const [formData, setFormData] = useState<Partial<User>>({
