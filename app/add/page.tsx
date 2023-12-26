@@ -9,7 +9,7 @@ interface EmployeeFormProps {
   onSubmit: (formData: Partial<User>) => void;
 }
 
-const EmployeeForm: React.FC<EmployeeFormProps> = () => {
+const Add: React.FC<EmployeeFormProps> = () => {
   const router = useRouter()
   const { addUser, users } = useUserStore();
   const [formData, setFormData] = useState<Partial<User>>({
@@ -78,5 +78,5 @@ const EmployeeForm: React.FC<EmployeeFormProps> = () => {
   );
 };
 
-export default EmployeeForm;
+export default Add;
 
