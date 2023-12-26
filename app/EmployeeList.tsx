@@ -10,13 +10,10 @@ const EmployeeList: React.FC = () => {
   const { users, loading, error, fetchUsers, editUser, deleteUser } = useUserStore();
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && !users.length) {
       fetchUsers();
     }
 
-    return () => {
-      // Perform cleanup, if needed
-    };
   }, []);
 
   useEffect(()=>{

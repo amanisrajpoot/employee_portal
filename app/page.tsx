@@ -4,6 +4,7 @@ import Link from 'next/link';
 import EmployeeList from './EmployeeList';
 
 const Home: React.FC = () => {
+
   return (
     <div className="container">
       <h1>Employee Management</h1>
