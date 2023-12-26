@@ -4,11 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams, useParams } from 'next/navigation';
 import { useUserStore, User } from '../../store/userStore';
 
-interface EditUserPageProps {
-  users: User[];
-}
-
-const EditUserPage: React.FC<EditUserPageProps> = () => {
+const EditUserPage: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams()
   const {id} = useParams()
