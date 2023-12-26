@@ -20,26 +20,36 @@ interface UserStore {
   addUser: (newUser: User) => void;
 }
 
+function mergeUniqueUsers(existingUsers: User[], newUsers: User[]): User[] {
+  const existingUserIds = new Set(existingUsers.map((user) => user.id));
+  const uniqueNewUsers = newUsers.filter((user) => !existingUserIds.has(user.id));
+
+  return [...existingUsers, ...uniqueNewUsers];
+}
+
 export const useUserStore = create<UserStore>((set) => ({
   users: [],
   loading: false,
   error: null,
   fetchUsers: async () => {
     set({ loading: true, error: null });
-
+  
     try {
       const response = await fetch('https://reqres.in/api/users');
       const data = await response.json();
-
+  
       if (response.ok) {
-        set({ users: data.data, loading: false });
+        set((state) => ({
+          users: mergeUniqueUsers(state.users, data.data),
+          loading: false,
+        }));
       } else {
         set({ error: 'Failed to fetch users', loading: false });
       }
     } catch (error) {
       set({ error: 'An error occurred', loading: false });
     }
-  },
+  },  
   editUser: (userId, updatedUser) =>
     set((state) => ({
       users: state.users.map((user) =>

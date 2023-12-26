@@ -2,19 +2,27 @@
 
 import React, { useEffect } from 'react';
 import EmployeeAvatar from './EmployeeAvatar';
-import { useUserStore } from '../store/userStore';
+import { useUserStore } from './store/userStore';
 import { useRouter } from 'next/navigation';
 
 const EmployeeList: React.FC = () => {
   const router = useRouter();
   const { users, loading, error, fetchUsers, editUser, deleteUser } = useUserStore();
-  
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       fetchUsers();
     }
-  }, [fetchUsers]);
 
+    return () => {
+      // Perform cleanup, if needed
+    };
+  }, []);
+
+  useEffect(()=>{
+    console.log("users", users)
+  },[])
+  
   const handleDeleteUser = (userId: number) => {
     deleteUser(userId);
   };

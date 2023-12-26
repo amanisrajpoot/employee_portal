@@ -1,13 +1,16 @@
 'use client'
 
 import Link from 'next/link';
-import EmployeeList from './pages/EmployeeList';
+import EmployeeList from './EmployeeList';
 
 const Home: React.FC = () => {
   return (
     <div className="container">
       <h1>Employee Management</h1>
-      <Link href="/add">Add Employee</Link>
+        <button style={{color:'white', margin:'10px'}}>
+          <Link href="/add" style={{color:'white', padding:'10px'}}>Add Employee</Link>
+        </button>
+
       <div>
         <EmployeeList />
       </div>

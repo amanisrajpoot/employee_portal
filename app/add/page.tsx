@@ -3,13 +3,15 @@
 import React, { useState } from 'react';
 import { User } from '../store/userStore';
 import { useRouter } from 'next/navigation';
+import { useUserStore } from '../store/userStore';
 
 interface EmployeeFormProps {
   onSubmit: (formData: Partial<User>) => void;
 }
 
-const EmployeeForm: React.FC<EmployeeFormProps> = ({ onSubmit }) => {
+const EmployeeForm: React.FC<EmployeeFormProps> = () => {
   const router = useRouter()
+  const { addUser, users } = useUserStore();
   const [formData, setFormData] = useState<Partial<User>>({
     id: 0,
     first_name: '',
@@ -17,6 +19,20 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ onSubmit }) => {
     email: '',
     avatar: '',
   });
+  
+  const handleFormSubmit = async (formData: Partial<User>) => {
+    const completeFormData: User = {
+      id: users.length+6+1, 
+      first_name: '',
+      last_name: '',
+      email: '',
+      avatar: '',
+      ...formData, 
+    };
+
+    await addUser(completeFormData);
+    router.push('/');
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,20 +46,21 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(formData);
-    router.push('/')
+    handleFormSubmit(formData);
   };
 
   return (
-    <form onSubmit={()=>handleSubmit}>
+
+    <form onSubmit={handleSubmit}>
+      <h1>Add Employee</h1>
       <label>
             First Name:
-            <input type="text" name="firstName" value={formData.first_name} onChange={handleChange} />
+            <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} />
           </label>
 
           <label>
             Last Name:
-            <input type="text" name="lastName" value={formData.last_name} onChange={handleChange} />
+            <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} />
           </label>
 
           <label>

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, useParams } from 'next/navigation';
 import { useUserStore, User } from '../../store/userStore';
 
 interface EditUserPageProps {
@@ -11,8 +11,10 @@ interface EditUserPageProps {
 const EditUserPage: React.FC<EditUserPageProps> = () => {
   const router = useRouter();
   const searchParams = useSearchParams()
-  const id = searchParams.get('id');
+  const {id} = useParams()
+  console.log(id)
   const { users, loading, error, fetchUsers, editUser, deleteUser } = useUserStore();
+  console.log(users)
   const [formData, setFormData] = useState<User>({
     id: 0,
     first_name: '',
@@ -34,6 +36,11 @@ const EditUserPage: React.FC<EditUserPageProps> = () => {
     editUser(parseInt(id as string, 10), formData);
 
     router.push('/');
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    setFormData((prevData) => ({ ...prevData, avatar: file }));
   };
 
   return (
@@ -72,6 +79,15 @@ const EditUserPage: React.FC<EditUserPageProps> = () => {
             value={formData.email}
             style={{margin:"10px", marginLeft:'5ch'}}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          />
+        </label>
+        <br />
+        <label>
+          Avatar:
+          <input
+            type="file"
+            name="avatar"
+            onChange={handleFileChange}
           />
         </label>
         <br />
