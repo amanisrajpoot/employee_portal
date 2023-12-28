@@ -8,8 +8,8 @@ const Home: React.FC = () => {
   return (
     <div className="container">
       <h1>Employee Management</h1>
-        <button style={{color:'white', margin:'10px'}}>
-          <Link href="/add" style={{color:'white', padding:'10px'}}>Add Employee</Link>
+        <button className="my-5">
+          <Link href="/add" className="text-white">Add Employee</Link>
         </button>
 
       <div>

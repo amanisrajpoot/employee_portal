@@ -42,7 +42,7 @@ const EmployeeList: React.FC = () => {
             <p>Email: {employee.email}</p>
           </div>
           <div>
-            <button onClick={() => router.push(`/employee/${employee.id}`)}>Edit</button>
+            <button onClick={() => router.push(`/employee/${employee.id}`)} className='mr-5 mt-2'>Edit</button>
             <button onClick={() => handleDeleteUser(employee.id)}>Delete</button>
           </div>
         </li>

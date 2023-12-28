@@ -40,7 +40,7 @@ const EditUserPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='flex flex-col justify-normal max-h-max max-w-max'>
       <h1>Edit User</h1>
       <form
         onSubmit={(e) => {
@@ -53,7 +53,7 @@ const EditUserPage: React.FC = () => {
           <input
             type="text"
             value={formData.first_name}
-            style={{margin:"10px"}}
+            className='ml-2 my-2'
             onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
           />
         </label>
@@ -63,7 +63,7 @@ const EditUserPage: React.FC = () => {
           <input
             type="text"
             value={formData.last_name}
-            style={{margin:"10px"}}
+            className='ml-2 my-2'
             onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
           />
         </label>
@@ -73,7 +73,7 @@ const EditUserPage: React.FC = () => {
           <input
             type="text"
             value={formData.email}
-            style={{margin:"10px", marginLeft:'5ch'}}
+            className='ml-12 my-2'
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
         </label>
@@ -84,10 +84,13 @@ const EditUserPage: React.FC = () => {
             type="file"
             name="avatar"
             onChange={handleFileChange}
+            className='ml-10 py-2'
           />
+          <label className='py-0 px-0 mx-0'>{formData.avatar && (formData.avatar as File)?.name}</label>
         </label>
+        
         <br />
-        <button type="submit">Save Changes</button>
+        <button type="submit" className='py-2'>Save Changes</button>
       </form>
     </div>
   );

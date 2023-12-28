@@ -37,6 +37,7 @@ const Add: React.FC = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
+    console.log(file)
     setFormData((prevData) => ({ ...prevData, avatar: file }));
   };
 
@@ -47,29 +48,30 @@ const Add: React.FC = () => {
 
   return (
 
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='flex flex-col justify-normal max-h-max max-w-max'>
       <h1>Add Employee</h1>
-      <label>
+          <label className='py-2'>
             First Name:
-            <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} />
+            <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} className='ml-4'/>
           </label>
 
-          <label>
+          <label className='py-2'>
             Last Name:
-            <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} />
+            <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} className='ml-4'/>
           </label>
 
-          <label>
+          <label className='py-2'>
             Email:
-            <input type="text" name="email" value={formData.email} onChange={handleChange} />
+            <input type="text" name="email" value={formData.email} onChange={handleChange} className='ml-14'/>
          </label>
 
-        <label>
+        <label className='py-2'>
             Avatar:
-            <input type="file" name="avatar" onChange={handleFileChange} />
+            <input type="file" name="avatar" onChange={handleFileChange} className='ml-12'/>
+            <label className='py-0 px-0 mx-0'>{formData.avatar && (formData.avatar as File)?.name}</label>
         </label>
 
-      <button type="submit">Add Employee</button>
+      <button type="submit" className='py-2'>Add Employee</button>
     </form>
   );
 };
